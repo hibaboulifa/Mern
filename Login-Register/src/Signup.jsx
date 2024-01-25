@@ -1,49 +1,54 @@
 import { useState } from 'react';
 import {Link} from "react-router-dom";
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
     
    const[name, setName] = useState()
    const[email, setEmail] = useState()
    const[password, setPassword] = useState()
+   const Navigate = useNavigate()
 
    const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('', {name, email, password})
-    .then(result => console.log(result))
-    .catch(err=> console.log())
+    axios.post('http://localhost:5173/register', {name, email, password})
+    .then(result => {console.log(result)
+        Navigate('/login')
+    
+    })
+    .catch(err=> console.log(err))
 
    }
     return(
-        <div className=''>
-<div className=''>
+        <div className='d-flex justify-content-center align-items-center bg-secondary vh-100'>
+<div className='bg bg-white p-3 rounded w-25'>
   <h2>register</h2>
   <form onSubmit={handleSubmit}>
     <div className='mb-3'>
         <label htmlFor='email'>
-            <strong>name</strong>
+            <strong>Name</strong>
         </label>
      <input type='text' placeholder='entrer name' autoComplete='off' name='email' className='form-control rounded-0' onChange={(e) => setName(e.target.value)}/>
     </div>
     
     <div className='mb-3'>
         <label htmlFor='email'>
-            <strong>email</strong>
+            <strong>Email</strong>
         </label>
      <input type='text' placeholder='entrer email' autoComplete='off' name='email' className='form-control rounded-0' onChange={(e) => setEmail(e.target.value)}/>
     </div>
 
     <div className='mb-3'>
         <label htmlFor='email'>
-            <strong>password</strong>
+            <strong>Password</strong>
         </label>
-     <input type='text' placeholder='entrer password' autoComplete='off' name='email' className='form-control rounded-0' onChange={(e) => setPassword(e.target.value)}/>
+     <input type='password' placeholder='entrer password' autoComplete='off' name='password' className='form-control rounded-0' onChange={(e) => setPassword(e.target.value)}/>
     </div>
-     <button type='submit' className='btn btn-successw-100 rounded'> registrer</button>
+     <button type='submit' className='btn btn-success w-100  rounded-0'> Registrer</button>
   </form>
-    <p>already have account</p>
-    <link to=" /login" className=''>login</link>
+    <p>Already have an  account</p>
+    <Link to=" /login" className='btn ntn-default border w-100 bg-ligth rounded-0 text-decoration-none'>Login</Link>
 </div>
         </div>
         
